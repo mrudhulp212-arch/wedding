@@ -1689,3 +1689,11 @@ a:focus-visible { outline: 2px solid #a17d53; outline-offset: 5px; }
   .site-footer { column-gap: 10px; padding-inline: 14px; }
   .site-footer .footer-date { font-size: 8px; gap: 6px; letter-spacing: .025em; }
 }
+
+/* Land on the celebration content rather than the section's top padding. */
+.details-intro { position: relative; }
+.celebration-anchor { position: absolute; top: 0; left: 0; width: 1px; height: 1px; scroll-margin-top: 0; }
+html { scroll-padding-top: 32px; }
+@media (prefers-reduced-motion: no-preference) {
+  .details-intro.scroll-reveal { transform: none; }
+}

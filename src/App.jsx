@@ -254,10 +254,11 @@ function App() {
           </div>
         </section>
 
-        <section className="details section-pad" id="the-day">
+        <section className="details section-pad" aria-labelledby="celebration-heading">
           <div className="details-intro">
+            <span id="the-day" className="celebration-anchor" aria-hidden="true" />
             <div className="section-kicker"><span className="kicker-line" /> THE CELEBRATION</div>
-            <h2>A day to<br /><em>remember.</em></h2>
+            <h2 id="celebration-heading">A day to<br /><em>remember.</em></h2>
             <p>Good food, happy tears, and dancing under the stars. Here’s what to expect.</p>
           </div>
           <div className="schedule">
