@@ -120,7 +120,7 @@ function App() {
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (motion.matches || !('IntersectionObserver' in window)) return;
-    const elements = [...document.querySelectorAll('.intro-heading, .intro-copy, .details-intro, .schedule-item, .date-band-content, .travel, .rsvp-content')];
+    const elements = [...document.querySelectorAll('.intro > .section-kicker, .intro-heading, .intro-copy, .details-intro, .schedule-item, .date-band-content, .travel, .rsvp-content, .site-footer')];
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -128,7 +128,7 @@ function App() {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
     elements.forEach((element) => {
       element.classList.add('scroll-reveal');
       observer.observe(element);
@@ -141,6 +141,33 @@ function App() {
       observer.disconnect();
       motion.removeEventListener('change', showAll);
       elements.forEach((element) => element.classList.remove('scroll-reveal', 'is-visible'));
+    };
+  }, []);
+
+  useEffect(() => {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const band = document.querySelector('.date-band');
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      if (!band || motion.matches) return;
+      const bounds = band.getBoundingClientRect();
+      if (bounds.bottom > 0 && bounds.top < window.innerHeight) {
+        const offset = (window.innerHeight / 2 - bounds.top - bounds.height / 2) * .08;
+        band.style.setProperty('--photo-offset', `${Math.max(-35, Math.min(35, offset))}px`);
+      }
+    };
+    const onScroll = () => {
+      if (!frame && !motion.matches) frame = window.requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      window.cancelAnimationFrame(frame);
+      band?.style.removeProperty('--photo-offset');
     };
   }, []);
 
@@ -242,7 +269,7 @@ function App() {
               </div>
               <span className="schedule-location">THE GARDEN</span>
             </article>
-            <article className="schedule-item">
+            <article className="schedule-item schedule-item-featured">
               <span className="schedule-time">10:30 <small>AM</small></span>
               <div className="schedule-detail">
                 <span className="schedule-icon"><Icon name="heart" /></span>

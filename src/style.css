@@ -1539,3 +1539,101 @@ a:focus-visible { outline: 2px solid #a17d53; outline-offset: 5px; }
 .footer-date svg { vertical-align: middle; }
 
 .nav-rsvp svg, .mobile-rsvp svg, .button svg, .text-link svg { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+
+/* Refined scroll choreography, with accessible motion preferences. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal { transition: opacity .85s ease, transform 1s cubic-bezier(.16,1,.3,1); }
+  .intro-heading.scroll-reveal { transform: translate(-36px, 18px); }
+  .intro-copy.scroll-reveal { transform: translate(36px, 18px); transition-delay: .14s; }
+  .intro > .section-kicker.scroll-reveal { transform: translateY(16px); }
+  .details-intro.scroll-reveal { transform: translateY(38px); }
+  .schedule-item.scroll-reveal { transform: translateX(40px); }
+  .schedule-item:nth-child(2).scroll-reveal { transition-delay: .12s; }
+  .schedule-item:nth-child(3).scroll-reveal { transition-delay: .24s; }
+  .date-band-content.scroll-reveal { transform: translateY(30px) scale(.97); }
+  .travel.scroll-reveal { transform: translateY(42px) scale(.98); }
+  .rsvp-content.scroll-reveal { transform: translateY(36px); }
+  .site-footer.scroll-reveal { transform: translateY(18px); }
+  .scroll-reveal.is-visible { opacity: 1; transform: none; }
+  .date-band-image { inset: -40px 0; transform: translateY(var(--photo-offset, 0px)); }
+  .date-band-content .countdown-unit { transition: transform .35s ease; }
+  .date-band-content .countdown-unit:hover { transform: translateY(-5px); }
+  .schedule-item { transition: opacity .85s ease, transform 1s cubic-bezier(.16,1,.3,1), box-shadow .3s ease; }
+  .schedule-item.is-visible:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(48,56,46,.07); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal { opacity: 1; transform: none; }
+  .date-band-image { transform: none; }
+}
+
+/* Clear event cards with a compact time label and full-width content. */
+.schedule { gap: 16px; }
+.schedule-item {
+  position: relative;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  padding: 24px 26px;
+  background: #fdfbf7;
+  border: 1px solid #dedbd0;
+  border-radius: 10px;
+}
+.schedule-time { display: inline-flex; align-items: baseline; gap: 5px; width: fit-content; padding: 6px 10px; border-radius: 4px; background: #eeece4; color: #485847; font-size: 18px; line-height: 1; }
+.schedule-time small { font-size: 9px; letter-spacing: .04em; }
+.schedule-detail { gap: 12px; align-items: flex-start; }
+.schedule-icon { width: 30px; height: 30px; background: #eeece4; }
+.schedule-detail > div { flex: 1; min-width: 0; }
+.schedule-detail h3 { margin: 1px 0 9px; font-size: 25px; line-height: 1.2; }
+.schedule-detail p { max-width: none; font-size: 13px; line-height: 1.8; color: #686e60; }
+.schedule-location { grid-column: 1; padding: 0 0 0 42px; font-size: 9px; line-height: 1.5; letter-spacing: .12em; white-space: normal; color: #8c795d; }
+@media (max-width: 640px) {
+  .schedule { gap: 14px; }
+  .schedule-item { grid-template-columns: 1fr; gap: 14px; padding: 22px 20px; }
+  .schedule-detail h3 { font-size: 25px; }
+  .schedule-detail p { font-size: 13px; line-height: 1.8; }
+  .schedule-time { font-size: 18px; }
+  .schedule-location { padding-left: 42px; }
+}
+
+/* Editorial timeline with the ceremony as its visual centerpiece. */
+.schedule { position: relative; padding-left: 24px; gap: 18px; }
+.schedule::before { content: ''; position: absolute; left: 5px; top: 28px; bottom: 28px; width: 1px; background: #c7cbbb; }
+.schedule-item { padding: 24px; gap: 16px; border: 1px solid #e1dfd5; border-radius: 12px; background: #fdfbf7; box-shadow: 0 4px 14px rgba(48,56,46,.025); }
+.schedule-item::before { content: ''; position: absolute; top: 30px; left: -24px; width: 9px; height: 9px; border: 2px solid var(--paper); border-radius: 50%; background: #a17d53; box-shadow: 0 0 0 1px #c9b59a; }
+.schedule-time { padding: 0; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .08em; }
+.schedule-time small { font-size: 10px; font-weight: 400; }
+.schedule-detail { gap: 14px; }
+.schedule-icon { width: 36px; height: 36px; border: 1px solid #e1dfd5; color: #9c7959; background: #f8f6f1; }
+.schedule-detail h3 { font-size: 27px; line-height: 1.18; margin: 2px 0 10px; }
+.schedule-detail p { font-size: 13px; line-height: 1.8; }
+.schedule-location { margin-left: 50px; padding: 13px 0 0; border-top: 1px solid #e6e2d8; letter-spacing: .14em; font-size: 9px; }
+.schedule-item-featured { background: #485847; border-color: #485847; box-shadow: 0 8px 24px rgba(48,56,46,.12); }
+.schedule-item-featured .schedule-time { color: #ead8bc; }
+.schedule-item-featured h3 { color: #f8f6f1; }
+.schedule-item-featured .schedule-detail p { color: #e1e4d9; }
+.schedule-item-featured .schedule-icon { color: #ead8bc; background: rgba(248,246,241,.08); border-color: rgba(248,246,241,.2); }
+.schedule-item-featured .schedule-location { color: #ead8bc; border-color: rgba(248,246,241,.18); }
+@media (prefers-reduced-motion: no-preference) {
+  .schedule-item.scroll-reveal { transform: translate(24px, 20px); transition: opacity .75s ease, transform .85s cubic-bezier(.16,1,.3,1), box-shadow .3s ease; }
+  .schedule-item.scroll-reveal.is-visible { transform: none; }
+  .schedule-item::before { transition: box-shadow .35s ease; }
+  .schedule-item.is-visible:hover::before { box-shadow: 0 0 0 5px rgba(161,125,83,.15); }
+  .schedule-item.is-visible:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(48,56,46,.10); }
+}
+@media (max-width: 640px) {
+  .schedule { padding-left: 20px; gap: 16px; }
+  .schedule::before { left: 4px; }
+  .schedule-item { padding: 20px 18px; }
+  .schedule-item::before { left: -21px; }
+  .schedule-detail { gap: 12px; }
+  .schedule-detail h3 { font-size: 25px; }
+  .schedule-icon { width: 30px; height: 30px; }
+  .schedule-location { margin-left: 42px; padding: 12px 0 0; }
+}
+
+/* Use the ceremony palette consistently across every event card. */
+.schedule-item { background: #485847; border-color: #485847; box-shadow: 0 8px 24px rgba(48,56,46,.12); }
+.schedule-item .schedule-time { color: #ead8bc; }
+.schedule-item h3 { color: #f8f6f1; }
+.schedule-item .schedule-detail p { color: #e1e4d9; }
+.schedule-item .schedule-icon { color: #ead8bc; background: rgba(248,246,241,.08); border-color: rgba(248,246,241,.2); }
+.schedule-item .schedule-location { color: #ead8bc; border-color: rgba(248,246,241,.18); }
