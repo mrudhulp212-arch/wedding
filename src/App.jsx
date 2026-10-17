@@ -15,6 +15,14 @@ function Icon({ name, size = 20 }) {
     'aria-hidden': true,
   }
 
+  if (name === 'sparkle') {
+    return (
+      <svg {...shared}>
+        <path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5" />
+      </svg>
+    )
+  }
+
   if (name === 'pin') {
     return (
       <svg {...shared}>
@@ -141,7 +149,7 @@ function App() {
       )}
       <div className="announcement">
         <span>We’re getting married!</span>
-        <span className="announcement-divider">✳</span>
+        <span className="announcement-divider"><Icon name="sparkle" size={12} /></span>
         <span>December 30, 2026 · Kuthuparamba</span>
       </div>
 
@@ -257,7 +265,7 @@ function App() {
         </section>
 
         <section className="rsvp section-pad" id="rsvp">
-          <div className="rsvp-flower" aria-hidden="true">✳</div>
+          <div className="rsvp-flower" aria-hidden="true"><Icon name="sparkle" size="1em" /></div>
           <div className="rsvp-content">
             <div className="section-kicker"><span className="kicker-line" /> YOU ARE WARMLY INVITED</div>
             <h2>Come share<br /><em>our happiness.</em></h2>
@@ -274,7 +282,7 @@ function App() {
       <footer className="site-footer">
         <a className="footer-mark" href="#home">S<span>&amp;</span>H</a>
         <span>Made with love, for our favorite people.</span>
-        <span className="footer-date">12.30.26 <span>✳</span> KUTHUPARAMBA</span>
+        <span className="footer-date">12.30.26 <span><Icon name="sparkle" size={12} /></span> KUTHUPARAMBA</span>
       </footer>
     </>
   )
