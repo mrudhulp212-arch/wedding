@@ -1537,3 +1537,5 @@ a:focus-visible { outline: 2px solid #a17d53; outline-offset: 5px; }
 
 .announcement-divider { display: inline-flex; align-items: center; justify-content: center; }
 .footer-date svg { vertical-align: middle; }
+
+.nav-rsvp svg, .mobile-rsvp svg, .button svg, .text-link svg { display: inline-block; vertical-align: middle; flex-shrink: 0; }

@@ -15,6 +15,16 @@ function Icon({ name, size = 20 }) {
     'aria-hidden': true,
   }
 
+  if (name === 'arrow-up-right' || name === 'arrow-down') {
+    return (
+      <svg {...shared}>
+        {name === 'arrow-up-right'
+          ? <path d="M6 18 18 6M6 6h12v12" />
+          : <path d="M12 4v16M5 13l7 7 7-7" />}
+      </svg>
+    )
+  }
+
   if (name === 'sparkle') {
     return (
       <svg {...shared}>
@@ -161,9 +171,9 @@ function App() {
           <a href="#our-story">Our story</a>
           <a href="#the-day">The day</a>
           <a href="#travel">Travel</a>
-          <a className="nav-rsvp" href="#rsvp">Join us <span aria-hidden="true">↗</span></a>
+          <a className="nav-rsvp" href="#rsvp">Join us <span aria-hidden="true"><Icon name="arrow-up-right" size={14} /></span></a>
         </nav>
-        <a className="mobile-rsvp" href="#rsvp">Join us <span aria-hidden="true">↗</span></a>
+        <a className="mobile-rsvp" href="#rsvp">Join us <span aria-hidden="true"><Icon name="arrow-up-right" size={14} /></span></a>
       </header>
 
       <main>
@@ -180,7 +190,7 @@ function App() {
             <h1>Sarang <span className="hero-amp">&amp;</span><br /><em>Harishma</em></h1>
             <div className="hero-date">30 DECEMBER 2026 <span aria-hidden="true">·</span> KUTHUPARAMBA</div>
             <p>We found our way to each other.<br />Now we’d love to celebrate with you.</p>
-            <a className="button button-light" href="#the-day">Explore the celebration <span aria-hidden="true">↓</span></a>
+            <a className="button button-light" href="#the-day">Explore the celebration <span aria-hidden="true"><Icon name="arrow-down" size={20} /></span></a>
           </div>
           <div className="hero-caption">
             <span>City Auditorium</span>
@@ -259,7 +269,7 @@ function App() {
             <p className="travel-lead">City Auditorium, Kuthuparamba<br />Near Sub Treasury, Kuthuparamba<br />670643</p>
             <p>Join us at City Auditorium near Sub Treasury in Kuthuparamba. Use the map to find the venue, or open directions to plan your journey.</p>
             <a className="text-link" href="https://www.google.com/maps/dir/?api=1&destination=City+Auditorium+Kuthuparamba+near+Sub+Treasury+Kerala+670643" target="_blank" rel="noreferrer">
-              Directions <span aria-hidden="true">↗</span>
+              Directions <span aria-hidden="true"><Icon name="arrow-up-right" size={15} /></span>
             </a>
           </div>
         </section>
@@ -272,7 +282,7 @@ function App() {
             <p className="invitation-message">Together with our families, we invite you to celebrate our wedding. Your presence and blessings will make our day even more special.</p>
             <p className="invitation-names">Sarang &amp; Harishma</p>
             <p className="invitation-details">December 30, 2026 ? 10:30 AM<br />City Auditorium, Kuthuparamba</p>
-            <a className="button button-dark" href="#travel">View location <span aria-hidden="true">?</span></a>
+            <a className="button button-dark" href="#travel">View location <span aria-hidden="true"><Icon name="pin" size={18} /></span></a>
             <p className="invitation-closing">We look forward to celebrating with you and your family.</p>
           </div>
           <div className="rsvp-side-note">DECEMBER 30<br />TWO THOUSAND TWENTY-SIX</div>
