@@ -137,7 +137,7 @@ a {
 }
 
 .hero-image {
-  background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2400&q=90');
+  background-image: url('/wedding-hero.jpg');
   background-size: cover;
   background-position: center 45%;
   transform: scale(1.015);
@@ -1696,4 +1696,10 @@ a:focus-visible { outline: 2px solid #a17d53; outline-offset: 5px; }
 html { scroll-padding-top: 32px; }
 @media (prefers-reduced-motion: no-preference) {
   .details-intro.scroll-reveal { transform: none; }
+}
+
+/* Restore the original photograph with a lighter readable overlay. */
+.hero-shade { background: linear-gradient(90deg, rgba(16,29,22,.64), rgba(16,29,22,.22) 65%, rgba(16,29,22,.08)), linear-gradient(0deg, rgba(16,29,22,.50), transparent 55%); }
+@media (max-width: 640px) {
+  .hero-image { background-position: 58% center; }
 }
