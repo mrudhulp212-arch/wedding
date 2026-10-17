@@ -85,8 +85,18 @@ function App() {
   const [introVisible, setIntroVisible] = useState(true);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIntroVisible(false), 2000);
-    return () => window.clearTimeout(timer);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    const timer = window.setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.body.style.overflow = previousOverflow;
+      setIntroVisible(false);
+    }, 2000);
+    return () => {
+      window.clearTimeout(timer);
+      document.body.style.overflow = previousOverflow;
+    };
   }, []);
 
   useEffect(() => {
@@ -152,17 +162,23 @@ function App() {
         <section className="hero" id="home">
           <div className="hero-image" role="img" aria-label="A couple celebrating their wedding in the Tuscan countryside" />
           <div className="hero-shade" />
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="hero-countdown">
+            <span className="hero-countdown-title">Counting down to forever</span>
+            <Countdown />
+          </div>
           <div className="hero-content">
-            <span className="eyebrow hero-eyebrow">A little note from us</span>
-            <h1>Two hearts.<br /><em>One beautiful</em><br />day.</h1>
+            <span className="eyebrow hero-eyebrow">Together with our families</span>
+            <h1>Sarang <span className="hero-amp">&amp;</span><br /><em>Harishma</em></h1>
+            <div className="hero-date">30 DECEMBER 2026 <span aria-hidden="true">·</span> KUTHUPARAMBA</div>
             <p>We found our way to each other.<br />Now we’d love to celebrate with you.</p>
-            <a className="button button-light" href="#the-day">Join us <span aria-hidden="true">↓</span></a>
+            <a className="button button-light" href="#the-day">Explore the celebration <span aria-hidden="true">↓</span></a>
           </div>
           <div className="hero-caption">
             <span>City Auditorium</span>
             <span>Kuthuparamba</span>
           </div>
-          <div className="hero-index">01 <span /> 03</div>
+          <a className="hero-scroll" href="#our-story" aria-label="Discover our story"><span />Discover our story</a>
         </section>
 
         <section className="intro section-pad" id="our-story">
@@ -179,7 +195,7 @@ function App() {
               <div className="signature">With love, <span>Sarang &amp; Harishma</span></div>
             </div>
           </div>
-          <div className="intro-decoration" aria-hidden="true">A <span>&amp;</span> E</div>
+          <div className="intro-decoration" aria-hidden="true">S <span>&amp;</span> H</div>
         </section>
 
         <section className="date-band" aria-label="Wedding date">
