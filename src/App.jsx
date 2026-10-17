@@ -318,8 +318,8 @@ function App() {
 
       <footer className="site-footer">
         <a className="footer-mark" href="#home">S<span>&amp;</span>H</a>
-        <span>Made with love, for our favorite people.</span>
-        <span className="footer-date">12.30.26 <span><Icon name="sparkle" size={12} /></span> KUTHUPARAMBA</span>
+        <span className="footer-message">Made with love, for our favorite people.</span>
+        <span className="footer-date"><time dateTime="2026-12-30">12.30.26</time><span aria-hidden="true"><Icon name="sparkle" size={12} /></span><span className="footer-place">Kuthuparamba</span></span>
       </footer>
     </>
   )
