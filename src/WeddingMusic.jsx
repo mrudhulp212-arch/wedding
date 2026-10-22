@@ -66,6 +66,7 @@ export default function WeddingMusic() {
           player.current.schedule()
           setPlaying(true)
           window.removeEventListener('pointerdown', start)
+          window.removeEventListener('touchend', start)
           window.removeEventListener('keydown', start)
         }
       } catch {
@@ -73,11 +74,13 @@ export default function WeddingMusic() {
       }
     }
     window.addEventListener('pointerdown', start)
+    window.addEventListener('touchend', start, { passive: true })
     window.addEventListener('keydown', start)
     start()
     return () => {
       disposed = true
       window.removeEventListener('pointerdown', start)
+      window.removeEventListener('touchend', start)
       window.removeEventListener('keydown', start)
       if (player.current) {
         window.clearInterval(player.current.timer)
@@ -103,9 +106,10 @@ export default function WeddingMusic() {
   }
 
   return (
-    <button className="music-toggle" type="button" onPointerDown={event => event.stopPropagation()} onKeyDown={event => event.stopPropagation()} onClick={toggle} aria-pressed={playing} aria-label={playing ? 'Pause romantic music' : 'Play romantic music'}>
-      <span aria-hidden="true">{playing ? 'Ⅱ' : '♫'}</span>
-      {playing ? 'Pause music' : 'Play music'}
+    <button className="music-toggle" type="button" onPointerDown={event => event.stopPropagation()} onTouchEnd={event => event.stopPropagation()} onKeyDown={event => event.stopPropagation()} onClick={toggle} aria-pressed={playing} aria-label={playing ? 'Pause romantic music' : 'Play romantic music'}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {playing ? <><path d="M9 5v14M15 5v14" /></> : <><path d="M9 18V5l11-2v13M9 8l11-2" /><ellipse cx="6" cy="18" rx="3" ry="2" /><ellipse cx="17" cy="16" rx="3" ry="2" /></>}
+      </svg>
     </button>
   )
 }
