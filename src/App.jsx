@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import WeddingMusic from './WeddingMusic'
+import useScrollDepth from './useScrollDepth'
 
 const weddingDate = new Date('2026-12-30T10:30:00+05:30')
 
@@ -101,6 +102,7 @@ function getTimeRemaining() {
 }
 
 function App() {
+  useScrollDepth()
   const [introVisible, setIntroVisible] = useState(true);
 
   useEffect(() => {

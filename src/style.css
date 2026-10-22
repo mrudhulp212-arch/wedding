@@ -1735,3 +1735,28 @@ html { scroll-padding-top: 32px; }
 }
 /* Keep the floating control clear of the footer's text at the end of the page. */
 .site-footer { padding-right: max(68px, calc(56px + env(safe-area-inset-right, 0px))); }
+
+/* Independent transforms preserve the existing entrance animations. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero { perspective: 1200px; }
+  .hero-content {
+    translate: 0 var(--hero-depth, 0px);
+    rotate: x var(--hero-turn, 0deg);
+    transform-origin: center bottom;
+  }
+  .hero-glow { translate: 0 calc(var(--hero-depth, 0px) * -0.6); }
+  .intro-decoration { translate: 0 calc(var(--depth-drift, 0px) * -1.8); rotate: y var(--depth-turn, 0deg); }
+  .date-band-content { rotate: x var(--depth-turn, 0deg); }
+  .rsvp-flower { translate: 0 var(--depth-drift, 0px); rotate: var(--depth-turn, 0deg); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .schedule { perspective: 1000px; }
+  .schedule-item.is-visible {
+    transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition: transform .2s ease-out, box-shadow .25s ease;
+  }
+  .schedule-item:hover { box-shadow: 0 16px 30px -22px #30382e66; }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .hero-content { translate: 0 calc(var(--hero-depth, 0px) * .35); rotate: none; }
+}
