@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import WeddingMusic from './WeddingMusic'
 
 const weddingDate = new Date('2026-12-30T10:30:00+05:30')
 
@@ -173,6 +174,7 @@ function App() {
 
   return (
     <>
+      <WeddingMusic />
       {introVisible && (
         <div className="opening-screen" role="status" aria-label="Welcome to Sarang and Harishma?s wedding">
           <div className="opening-halo" aria-hidden="true" />

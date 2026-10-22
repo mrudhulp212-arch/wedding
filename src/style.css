@@ -1703,3 +1703,26 @@ html { scroll-padding-top: 32px; }
 @media (max-width: 640px) {
   .hero-image { background-position: 58% center; }
 }
+.music-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 17px;
+  border: 1px solid #bca987;
+  border-radius: 30px;
+  background: #faf6ed;
+  color: #443e32;
+  font: 500 12px/1.2 sans-serif;
+  box-shadow: 0 4px 20px #0002;
+  cursor: pointer;
+}
+.music-toggle span { font-size: 18px; }
+.music-toggle:hover { background: #eee5d5; }
+.music-toggle:focus-visible { outline: 2px solid #716441; outline-offset: 4px; }
+@media (max-width: 600px) {
+  .music-toggle { right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); }
+}
