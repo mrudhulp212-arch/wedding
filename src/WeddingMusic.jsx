@@ -60,10 +60,24 @@ export default function WeddingMusic() {
             }
           }
           player.current = { context, timer: window.setInterval(schedule, 250), schedule }
+          // Start as soon as the browser permits audio, including automatic resume.
+          context.onstatechange = () => {
+            if (disposed) return
+            const running = context.state === 'running'
+            setPlaying(running)
+            if (running) {
+              schedule()
+              window.removeEventListener('pointerdown', start)
+              window.removeEventListener('touchend', start)
+              window.removeEventListener('keydown', start)
+            }
+          }
+          schedule()
         }
-        await player.current.context.resume()
-        if (!disposed && player.current.context.state === 'running') {
-          player.current.schedule()
+        const active = player.current
+        await active.context.resume()
+        if (!disposed && active.context.state === 'running') {
+          active.schedule()
           setPlaying(true)
           window.removeEventListener('pointerdown', start)
           window.removeEventListener('touchend', start)
@@ -84,7 +98,8 @@ export default function WeddingMusic() {
       window.removeEventListener('keydown', start)
       if (player.current) {
         window.clearInterval(player.current.timer)
-        player.current.context.close()
+        player.current.context.onstatechange = null
+        player.current.context.close().catch(() => {})
         player.current = null
       }
     }
